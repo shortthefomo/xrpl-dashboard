@@ -1,0 +1,37 @@
+:root {
+  --bg: #0a0a0a;
+  --bg-2: #141414;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --cyan: #3b82f6;
+  --cyan-2: #60a5fa;
+  --green: #22c55e;
+  --red: #ef4444;
+  --gold: #f97316;
+  --orange: #f97316;
+  --purple: #ec4899;
+  --line: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#app {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  overflow: hidden;
+}
+button {
+  font-family: inherit;
+}
+body {
+  background:
+    radial-gradient(1200px 600px at 70% 20%, rgba(40, 80, 140, 0.12), transparent 55%),
+    var(--bg);
+}
