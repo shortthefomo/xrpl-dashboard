@@ -313,7 +313,7 @@ export function useXrpl() {
       lane: laneForTxType(type),
       proposed: false,
       hash,
-      ledger: Number(msg.ledger_index || 0),
+      ledger: Number(msg.ledger_index || body.inLedger || body.ledger_index || 0),
       result: msg.engine_result,
       at: rippleToUnixMs(body.date || msg.date),
     })
