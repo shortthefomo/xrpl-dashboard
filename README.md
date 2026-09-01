@@ -24,6 +24,14 @@ Open [http://localhost:5180/](http://localhost:5180/).
 XRPL_WS=ws://127.0.0.1:6006 npm run dev
 ```
 
+## Evernode
+
+Click-deploy on evrPanel with the image repo: [shortthefomo/xrpl-dashboard-evernode](https://github.com/shortthefomo/xrpl-dashboard-evernode)
+
+```
+ghcr.io/shortthefomo/xrpl-dashboard-evernode:latest--subdomain--xrpl
+```
+
 ## Stack
 
 Vue 3 + Vite + [xrpl.js](https://github.com/XRPLF/xrpl.js). Subscribes to `ledger`, `transactions`, `transactions_proposed`, `validations`, and `manifests`. UNL keys come from [vl.ripple.com](https://vl.ripple.com) when the server has no admin `validators` command (Clio / public cluster).
