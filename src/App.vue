@@ -91,7 +91,7 @@ watch(
         <div class="metric">
           <div class="label">Validated Transactions</div>
           <div class="hero cyan">{{ commas(xrpl.validatedTotal.value) }}</div>
-          <div class="sub">session · {{ commas(xrpl.proposedTotal.value) }} proposed in-flight</div>
+          <div class="sub">session · {{ commas(xrpl.openCount.value) }} proposed in-flight</div>
         </div>
 
         <div class="types">
@@ -126,12 +126,12 @@ watch(
       <div class="loc">
         <div class="label">Proposed — Dropped</div>
         <div class="delta">
-          <span class="up">+{{ commas(xrpl.proposedTotal.value) }}</span>
+          <span class="up">+{{ commas(xrpl.openCount.value) }}</span>
           <span class="down">−{{ commas(xrpl.droppedTotal.value) }}</span>
         </div>
         <div class="xrp">
-          <span class="up">+{{ formatXrp(xrpl.xrpDeliveredDrops.value) }} XRP</span>
-          <span class="down">−{{ formatXrp(xrpl.feesDrops.value, 4) }} fees</span>
+          <span class="up">+{{ formatXrp(xrpl.feesDrops.value, 4) }} consumed</span>
+          <span class="down">−{{ formatXrp(xrpl.feesLostDrops.value, 4) }} lost</span>
         </div>
       </div>
 

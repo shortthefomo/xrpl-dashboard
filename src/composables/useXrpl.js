@@ -100,6 +100,7 @@ export function useXrpl() {
   const droppedTotal = ref(0)
   const xrpDeliveredDrops = ref(0)
   const feesDrops = ref(0)
+  const feesLostDrops = ref(0)
   const typeCounts = reactive({})
   const typeProposed = reactive({})
 
@@ -247,6 +248,7 @@ export function useXrpl() {
         const rec = map.get(hash) || { type, account: body.Account }
         rec.lastLedger = cur || rec.lastLedger || 0
         rec.lls = lls || rec.lls || 0
+        rec.fee = rec.fee || feeDrops(msg)
         rec.t = Date.now()
         map.set(hash, rec)
         openProposed.value = map
@@ -263,6 +265,7 @@ export function useXrpl() {
           account: body.Account,
           lastLedger: cur,
           lls,
+          fee: feeDrops(msg),
         })
       if (map.size > OPEN_MAX) {
         const first = map.keys().next().value
@@ -277,6 +280,7 @@ export function useXrpl() {
         lane: 'proposed',
         proposed: true,
         hash,
+        ledger: cur,
         at: rippleToUnixMs(body.date),
       })
       pushFeed({
@@ -309,6 +313,7 @@ export function useXrpl() {
       lane: laneForTxType(type),
       proposed: false,
       hash,
+      ledger: Number(msg.ledger_index || 0),
       result: msg.engine_result,
       at: rippleToUnixMs(body.date || msg.date),
     })
@@ -349,10 +354,12 @@ export function useXrpl() {
       const expired = rec.lls ? index >= rec.lls : rec.lastLedger && index - rec.lastLedger >= 3
       if (expired) {
         droppedTotal.value++
+        feesLostDrops.value += rec.fee || 0
         droppedFeed.value = [
           { hash: h, type: rec.type, account: rec.account, ledger: index },
           ...droppedFeed.value,
         ].slice(0, 12)
+        pulse({ kind: 'dropped', hash: h, type: rec.type })
       } else still.set(h, rec)
     }
     openProposed.value = still
@@ -791,6 +798,7 @@ export function useXrpl() {
     droppedTotal,
     xrpDeliveredDrops,
     feesDrops,
+    feesLostDrops,
     rankedTypes,
     typeCounts,
     openCount,

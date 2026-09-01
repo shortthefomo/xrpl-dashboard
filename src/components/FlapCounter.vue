@@ -23,13 +23,13 @@ const digits = computed(() => String(Math.max(0, Number(props.value) || 0)).padS
 <style scoped>
 .board {
   display: inline-flex;
-  gap: 2px;
-  perspective: 80px;
+  gap: 3px;
+  perspective: 100px;
 }
 .unit {
   position: relative;
-  width: 11px;
-  height: 16px;
+  width: 18px;
+  height: 24px;
   animation: flip-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both;
   transform-style: preserve-3d;
 }
@@ -47,9 +47,9 @@ const digits = computed(() => String(Math.max(0, Number(props.value) || 0)).padS
   text-align: center;
   font-family: 'IBM Plex Mono', ui-monospace, monospace;
   font-style: normal;
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 500;
-  line-height: 16px;
+  line-height: 24px;
   color: #e5e7eb;
 }
 .flag .face em {
